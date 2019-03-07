@@ -1,4 +1,3 @@
-import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
@@ -13,6 +12,11 @@ public class CarManager {
     private Instant stopTime = Instant.MAX;
     private static final Integer maxCars = 10;
 
+    private IScheduler scheduler;
+
+    public CarManager() {
+        scheduler = InstanceRegistry.lookupSingle(IScheduler.class);
+    }
 
     public Integer getLastCarId() {
         return lastCarId;
@@ -70,33 +74,16 @@ public class CarManager {
         car.setRunning(true);
         car.setLastUpdated(this.startTime);
 
-        Runnable runnable = () -> {
-            Instant runningTime;
-            do {
-                runningTime = Instant.now();
-                if (runningTime.compareTo(this.stopTime) > 0)
-                {
-                    runningTime = this.stopTime;
-                }
-                int period = (int)(Duration.between(runningTime, car.getLastUpdated()).getSeconds() / 1000 );
-                car.setX(car.getX() + period * car.getxDir());
-                car.setY(car.getY() + period * car.getyDir());
-                car.setLastUpdated(runningTime);
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            } while (isCarState() && car.isRunning());
+        Schedulable schedulable = () -> {
+            car.setX(car.getX() + car.getxDir());
+            car.setY(car.getY() + car.getyDir());
+            return (isCarState() && car.isRunning());
         };
-        runParallel(runnable);
+        runParallel(schedulable);
     }
 
-    private void runParallel(Runnable runnable) {
-
-        new Thread(runnable).start();
+    private void runParallel(Schedulable schedulable) {
+        scheduler.schedule(schedulable, 1);
     }
 
     public void stopMoving() {

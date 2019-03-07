@@ -1,16 +1,23 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by mahsa on 2/24/2019.
  */
 public class CarManagerTest {
+
+    private MockedScheduler mockedScheduler;
+
+    @Before
+    public void setup() {
+        mockedScheduler = new MockedScheduler();
+    }
+
     @Test
     public void startMoving() throws Exception {
         CarManager cm = new CarManager();
@@ -24,6 +31,8 @@ public class CarManagerTest {
         Assert.assertTrue(cm.getStartTime().isBefore(instTest1));
         Assert.assertTrue(c.isRunning());
         cm.stopMoving();
+
+        mockedScheduler.secondsPassed = 2;
 //        Car c2 = cm.getCarList().get(0);
 //        Assert.assertTrue(c2.getX() - c.getX() == c.getxDir() * 5);
 //        Assert.assertTrue(c2.getY() - c.getY() == c.getyDir() * 5);
@@ -112,5 +121,25 @@ public class CarManagerTest {
         System.out.println( "between:" + Duration.between(s, s2).getSeconds());
     }
 
+    class MockedScheduler implements IScheduler {
 
+        private int secondsPassed;
+
+        public MockedScheduler() {
+            InstanceRegistry.register(this);
+        }
+
+        @Override
+        public int schedule(Schedulable schedulable, int intervalSec) {
+            int times = secondsPassed / intervalSec;
+            for (int i = 0; i < times; i++) {
+                schedulable.run();
+            }
+            return times;
+        }
+
+        @Override
+        public void stop(int id) {
+        }
+    }
 }
