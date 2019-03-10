@@ -1,3 +1,5 @@
+package ir.ma.mahsa.business;
+
 import java.time.Instant;
 
 /**
@@ -9,8 +11,21 @@ public class Car {
     private Integer y;
     private Integer xDir;
     private Integer yDir;
+    //???
     private boolean running = false;
     private Instant lastUpdated = Instant.MAX;
+    //???
+
+
+    public Car() {
+    }
+
+    public Car(Integer x, Integer y, Integer xDir, Integer yDir) {
+        this.x = x;
+        this.y = y;
+        this.xDir = xDir;
+        this.yDir = yDir;
+    }
 
     public Integer getId() {
         return id;

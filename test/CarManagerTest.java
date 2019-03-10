@@ -1,3 +1,4 @@
+import ir.ma.mahsa.business.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,31 +24,30 @@ public class CarManagerTest {
         CarManager cm = new CarManager();
         Car c = getCar(1, 1, 1, 2);
         cm.addCar(c);
+        mockedScheduler.setSecondsPassed(3);
         cm.startMoving();
-        Thread.sleep(500);
-        Assert.assertFalse(cm.getStartTime().equals(Instant.MAX));
         Assert.assertTrue(cm.isCarState());
-        Instant instTest1 = Instant.now();
-        Assert.assertTrue(cm.getStartTime().isBefore(instTest1));
-        Assert.assertTrue(c.isRunning());
-        cm.stopMoving();
-
-        mockedScheduler.secondsPassed = 2;
-//        Car c2 = cm.getCarList().get(0);
-//        Assert.assertTrue(c2.getX() - c.getX() == c.getxDir() * 5);
-//        Assert.assertTrue(c2.getY() - c.getY() == c.getyDir() * 5);
+        Assert.assertTrue(c.getX() == 4);
+        Assert.assertTrue(c.getY() == 7);
     }
 
     @Test
     public void stopMoving() throws Exception {
         CarManager cm = new CarManager();
-        cm.setCarState(true);
+        Car c1 = getCar(1, 1, 1, 2);
+        cm.addCar(c1);
+        mockedScheduler.setSecondsPassed(2);
+        cm.startMoving();
         cm.stopMoving();
-        Thread.sleep(1000);
-        Instant instTest = Instant.now();
-        Assert.assertFalse(cm.getStopTime().equals(Instant.MAX));
-        Assert.assertTrue(cm.getStopTime().isBefore(instTest));
         Assert.assertFalse(cm.isCarState());
+        Assert.assertFalse(c1.isRunning());
+        Car c2 = getCar(2,3,1,1);
+        Thread.sleep(1000);
+        Assert.assertEquals(2, (int) c1.getX());
+        Assert.assertEquals(3, (int) c1.getY());
+        Thread.sleep(1000);
+        Assert.assertEquals(2, (int) c1.getX());
+        Assert.assertEquals(3, (int) c1.getY());
     }
 
     @org.junit.Test
@@ -118,7 +118,7 @@ public class CarManagerTest {
         Thread.sleep(2700);
         Instant s2 = Instant.now();
         System.out.println("s2:" + s2.getEpochSecond());
-        System.out.println( "between:" + Duration.between(s, s2).getSeconds());
+        System.out.println("between:" + Duration.between(s, s2).getSeconds());
     }
 
     class MockedScheduler implements IScheduler {
@@ -140,6 +140,10 @@ public class CarManagerTest {
 
         @Override
         public void stop(int id) {
+        }
+
+        public void setSecondsPassed(int secondsPassed) {
+            this.secondsPassed = secondsPassed;
         }
     }
 }

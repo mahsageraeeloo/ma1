@@ -1,3 +1,5 @@
+package ir.ma.mahsa.business;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -34,6 +36,7 @@ public class SchedulerTimerImpl implements IScheduler {
     }
 
     @Override
+    //we can stop a task or stop whole tasks of scheduler
     public void stop(int id) {
         taskMap.get(id).cancel();
     }
