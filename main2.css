@@ -1,0 +1,16 @@
+.dot{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color:#ffffff;
+    border-radius: 50%;
+    display: inline-block;
+    left: 40px;
+    top: 100px;
+}
+.container {
+    position: relative;
+    height: 300px;
+    width: 600px;
+    background: lightgrey;
+}
