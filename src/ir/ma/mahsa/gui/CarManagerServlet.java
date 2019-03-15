@@ -1,9 +1,38 @@
-public class CarManagerServlet extends javax.servlet.http.HttpServlet {
-    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+package ir.ma.mahsa.gui;
 
+import ir.ma.mahsa.business.Car;
+import ir.ma.mahsa.business.CarManager;
+import ir.ma.mahsa.business.IScheduler;
+import ir.ma.mahsa.business.InstanceRegistry;
+import ir.ma.mahsa.business.exc.AddCarException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class CarManagerServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CarManager cm = InstanceRegistry.lookupSingle(CarManager .class);
+        String action = request.getParameter("action");
+        if (action.equalsIgnoreCase("addCar")) {
+            try {
+                cm.addCar(new Car(Integer.valueOf(request.getParameter("X")), Integer.valueOf(request.getParameter("Y")), Integer.valueOf(request.getParameter("XDir")), Integer.valueOf(request.getParameter("YDir"))));
+            } catch (AddCarException e) {
+                e.printStackTrace();
+            }
+        } else if (action.equalsIgnoreCase("removeCar")) {
+            cm.removeCar(Integer.valueOf(request.getParameter("CarID")));
+        } else if (action.equalsIgnoreCase("start")) {
+            cm.startMoving();
+        } else if (action.equalsIgnoreCase("stop")) {
+            cm.stopMoving();
+        }
+        response.sendRedirect("carManagerUI.jsp");
     }
 
-    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

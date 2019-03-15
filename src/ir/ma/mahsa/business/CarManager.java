@@ -11,7 +11,7 @@ public class CarManager {
     private HashMap<Integer, Car> carList = new HashMap<>(10);
     private Integer lastCarId = 0;
     private boolean carState = false;
-    private static final Integer MAX_CARS = 1;
+    private static final Integer MAX_CARS = 10;
 
     private IScheduler scheduler;
 
@@ -20,6 +20,7 @@ public class CarManager {
      */
     public CarManager() {
         scheduler = InstanceRegistry.lookupSingle(IScheduler.class);
+        InstanceRegistry.register(this);
     }
 
     public int addCar(Car c) throws AddCarException {
@@ -48,8 +49,8 @@ public class CarManager {
     private void startCarThread(final Car car) {
         car.setRunning(true);
         Schedulable schedulable = () -> {
-            car.setX(car.getX() + car.getxDir());
-            car.setY(car.getY() + car.getyDir());
+            car.setX((car.getX() + car.getxDir()) % 600);
+            car.setY((car.getY() + car.getyDir()) % 600);
             return (isCarState() && car.isRunning());
         };
         runParallel(schedulable);

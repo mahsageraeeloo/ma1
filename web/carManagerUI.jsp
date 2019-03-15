@@ -1,3 +1,7 @@
+<%@ page import="java.util.Date" %>
+<%@ page import="ir.ma.mahsa.business.CarManager" %>
+<%@ page import="ir.ma.mahsa.business.Car" %>
+<%@ page import="ir.ma.mahsa.business.InstanceRegistry" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +13,13 @@
 <form method="post" action="manageCar">
     <button type = "submit">Add</button><br>
     <label>X : </label>
-    <input type= "number" name="X">
+    <input type= "number" name="X" value="1">
     <label>X direction : </label>
-    <input type="number" name="XDir"> <br>
+    <input type="number" name="XDir" value="1"> <br>
     <label>Y : </label>
-    <input type="number" name="Y">
+    <input type="number" name="Y" value="1">
     <label>Y direction: </label>
-    <input type="number" name="YDir"><br><br>
+    <input type="number" name="YDir" value="1"><br><br>
     <input name="action" type="hidden" value="addCar">
 </form>
 <form method="post" action="manageCar">
@@ -25,7 +29,7 @@
     <input name="action" type="hidden" value="removeCar">
 </form>
 <form method="post" action="manageCar">
-    <button type = "submit" name="Start" value="Start">Start</button>
+    <button type = "submit" name="Start" value="Start" onclick="startRefresh()">Start</button>
     <input name="action" type="hidden" value="start">
 </form>
 <form method="post" action="manageCar">
@@ -34,7 +38,22 @@
 </form>
     <br><br>
     <div class="container">
-        <span class="dot" style="text-align: center"><label>1</label></span>
+        <%
+            CarManager cm = InstanceRegistry.lookupSingle(CarManager .class);
+            for (Car car: cm.getCarList()) { %>
+        <span class="dot" style="text-align: center; left: <%=car.getX()%>px; top: <%=car.getY()%>px"><label><%=car.getId()%></label></span>
+            <%} %>
+
     </div>
+    <script lang="javascript">
+        function startRefresh() {
+            setTimeout(function () {
+                window.location.reload(1);
+            }, 5000);
+        }
+        <%if(cm.isCarState()){%>
+        startRefresh();
+        <%}%>
+    </script>
 </body>
 </html>
