@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Car manager</title>
-    <link href="../main2.css" rel="stylesheet" type="text/css">
+    <link href="main2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <form method="post" action="manageCar">
