@@ -2,12 +2,13 @@ package ir.ma.mahsa.business;
 
 import ir.ma.mahsa.business.exc.AddCarException;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by mahsa on 2/24/2019.
  */
-public class CarManager {
+public class CarManager implements Serializable {
     private HashMap<Integer, Car> carList = new HashMap<>(10);
     private Integer lastCarId = 0;
     private boolean carState = false;

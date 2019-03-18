@@ -13,6 +13,14 @@
         <servlet-name>CarManagerServlet</servlet-name>
         <url-pattern>/manageCar</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CarListServlet</servlet-name>
+        <servlet-class>ir.ma.mahsa.gui.CarListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CarListServlet</servlet-name>
+        <url-pattern>/carList</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>ir.ma.mahsa.gui.MaContextListener</listener-class>
     </listener>
