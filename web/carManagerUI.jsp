@@ -54,15 +54,25 @@
         setInterval(function () {
             $.ajax({
                 url: "carList", success: function (result) {
-                    //$('.dot').remove();
-                  //$(result).each(function(index, item) {
-
-                    // var spanElement = document.createElement("span");
-                    // });
+                    $('.dot').remove();
+                    console.log(result);
+                    // var data = result.surrey;
+                    $ .each(jQuery.parseJSON(result), function (index, item) {
+                        console.log("111111");
+                        var spanElement = document.createElement("span");
+                        spanElement.setAttribute("class", "dot");
+                        // spanElement.style.textAlign = "center";
+                        spanElement.innerText = item.id;
+                        spanElement.style.setProperty("text-align", "center")
+                        spanElement.style.setProperty("left",item.X + "px");
+                        spanElement.style.setProperty("top",item.Y + "px");
+                         $('div').append(spanElement);
+                    });
                 }
             });
         }, 1000);
     }
+    startRefresh();
 </script>
 </body>
 </html>
