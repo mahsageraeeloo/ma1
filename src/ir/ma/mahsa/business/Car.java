@@ -16,7 +16,6 @@ public class Car {
     private Instant lastUpdated = Instant.MAX;
     //???
 
-
     public Car() {
     }
 

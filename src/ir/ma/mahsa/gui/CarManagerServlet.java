@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class CarManagerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CarManager cm = InstanceRegistry.lookupSingle(CarManager .class);
+        CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("addCar")) {
             try {

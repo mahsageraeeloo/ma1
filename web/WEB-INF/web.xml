@@ -16,6 +16,7 @@
     <servlet>
         <servlet-name>CarListServlet</servlet-name>
         <servlet-class>ir.ma.mahsa.gui.CarListServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>CarListServlet</servlet-name>

@@ -10,15 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 
 public class CarListServlet extends HttpServlet {
+    public CarListServlet() {
+        InstanceRegistry.register(this);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);
         PrintWriter writer = response.getWriter();
+        getCarListJson(writer);
+    }
+
+    public void getCarListJson(Writer writer) throws IOException {
+        CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);
         writer.write("[");
         boolean isFirstCar = true;
         for (Car car : cm.getCarList()

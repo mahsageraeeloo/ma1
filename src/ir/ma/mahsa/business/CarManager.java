@@ -33,6 +33,9 @@ public class CarManager implements Serializable {
         }
         c.setId(++lastCarId);
         carList.put(c.getId(), c);
+        if(isCarState()){ //?semaphore
+            startCarThread(c);
+        }
         return c.getId();
     }
 
