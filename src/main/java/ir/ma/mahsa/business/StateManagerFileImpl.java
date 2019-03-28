@@ -14,6 +14,7 @@ public class StateManagerFileImpl implements IStateManager {
         return isSaved;
     }
 
+
     public void setSaved(boolean saved) {
         isSaved = saved;
     }
