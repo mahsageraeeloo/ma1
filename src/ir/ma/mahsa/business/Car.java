@@ -1,20 +1,18 @@
 package ir.ma.mahsa.business;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 /**
  * Created by mahsa on 2/24/2019.
  */
-public class Car {
+public class Car implements Serializable {
     private Integer id;
     private Integer x;
     private Integer y;
     private Integer xDir;
     private Integer yDir;
-    //???
     private boolean running = false;
-    private Instant lastUpdated = Instant.MAX;
-    //???
 
     public Car() {
     }
@@ -70,14 +68,6 @@ public class Car {
         this.running = running;
     }
 
-    public Instant getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(Instant lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,7 +80,6 @@ public class Car {
         if (y != null ? !y.equals(car.y) : car.y != null) return false;
         if (xDir != null ? !xDir.equals(car.xDir) : car.xDir != null) return false;
         return yDir != null ? yDir.equals(car.yDir) : car.yDir == null;
-
     }
 
     @Override

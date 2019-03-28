@@ -2,19 +2,18 @@ package ir.ma.mahsa.business;
 
 import ir.ma.mahsa.business.exc.AddCarException;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
  * Created by mahsa on 2/24/2019.
  */
-public class CarManager implements Serializable {
+public class CarManager implements Serializable, IStatefull<List<Car>> {
     private HashMap<Integer, Car> carList = new HashMap<>(10);
     private Integer lastCarId = 0;
     private boolean carState = false;
-    private static final Integer MAX_CARS = 10;
-
-    private IScheduler scheduler;
+    private static final Integer MAX_CARS = 20;
+    private transient IScheduler scheduler;
 
     /*
     I will add an argument for max numbers of cars in car manager
@@ -22,6 +21,10 @@ public class CarManager implements Serializable {
     public CarManager() {
         scheduler = InstanceRegistry.lookupSingle(IScheduler.class);
         InstanceRegistry.register(this);
+    }
+
+    public void setLastCarId(Integer lastCarId) {
+        this.lastCarId = lastCarId;
     }
 
     public int addCar(Car c) throws AddCarException {
@@ -33,7 +36,7 @@ public class CarManager implements Serializable {
         }
         c.setId(++lastCarId);
         carList.put(c.getId(), c);
-        if(isCarState()){ //?semaphore
+        if (isCarState()) { //?semaphore
             startCarThread(c);
         }
         return c.getId();
@@ -77,6 +80,10 @@ public class CarManager implements Serializable {
         return temp;
     }
 
+    public void setCarList(HashMap<Integer, Car> carList) {
+        this.carList = carList;
+    }
+
     public boolean isCarState() {
         return carState;
     }
@@ -85,4 +92,29 @@ public class CarManager implements Serializable {
         this.carState = carState;
     }
 
+    public void removeAll() {
+        for (Car car : this.getCarList()) {
+            this.removeCar(car.getId());
+        }
+    }
+
+    @Override
+    public List<Car> getState() {
+        return this.getCarList();
+    }
+
+    @Override
+    public void setState(List<Car> list) {
+        int max = 0;
+        HashMap<Integer, Car> cars = new HashMap<>();
+        for (Car c : list) {
+            int id = c.getId();
+            if (id > max) {
+                max = c.getId();
+            }
+            cars.put(id, c);
+        }
+        this.setLastCarId(max);
+        this.setCarList(cars);
+    }
 }

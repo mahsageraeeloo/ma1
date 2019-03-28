@@ -42,6 +42,15 @@
     <button type="submit" name="Stop" value="Stop">Stop</button>
     <input name="action" type="hidden" value="stop">
 </form>
+<form method="post" action="manageCar">
+    <button type="submit" name="Save" value="Save">Save</button>
+    <input name="action" type="hidden" value="save">
+</form>
+<form method="post" action="manageCar">
+    <button type="submit" name="Reset" value="Reset">Reset</button>
+    <input name="action" type="hidden" value="reset">
+</form>
+
 <br><br>
 <div class="container" id="div1">
     <%--    <%--%>

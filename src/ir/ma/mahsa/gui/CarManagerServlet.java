@@ -1,9 +1,6 @@
 package ir.ma.mahsa.gui;
 
-import ir.ma.mahsa.business.Car;
-import ir.ma.mahsa.business.CarManager;
-import ir.ma.mahsa.business.IScheduler;
-import ir.ma.mahsa.business.InstanceRegistry;
+import ir.ma.mahsa.business.*;
 import ir.ma.mahsa.business.exc.AddCarException;
 
 import javax.servlet.ServletException;
@@ -15,6 +12,7 @@ import java.io.IOException;
 public class CarManagerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);
+        IStateManager iStateManager = InstanceRegistry.lookupSingle(IStateManager.class);
         String action = request.getParameter("action");
         if (action.equalsIgnoreCase("addCar")) {
             try {
@@ -28,6 +26,12 @@ public class CarManagerServlet extends HttpServlet {
             cm.startMoving();
         } else if (action.equalsIgnoreCase("stop")) {
             cm.stopMoving();
+//            cm.persistCarList();
+        } else if (action.equalsIgnoreCase("save")) {
+//            cm.persistCarList();
+            iStateManager.saveState(cm);
+        } else if (action.equalsIgnoreCase("reset")) {
+            cm.removeAll();
         }
         response.sendRedirect("carManagerUI.jsp");
     }
