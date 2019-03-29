@@ -6,47 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51fcecc4-2181-4358-b868-f6e255e87b9b" name="Default" comment="call JavaScript Function With Javacode Result As param">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ma1_war.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/ma1_war_exploded.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_3_0_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6__2_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ma1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ma1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/CarManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/CarManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/IScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/IScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/IStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/IStateManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/IStatefull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/IStatefull.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/InstanceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/InstanceRegistry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/Schedulable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/Schedulable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/SchedulerThreadImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/SchedulerThreadImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/SchedulerTimerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/SchedulerTimerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/StateManagerFileImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/StateManagerFileImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/business/exc/AddCarException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/business/exc/AddCarException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/AbstractCuiOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/AbstractCuiOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/AddCarCuiOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/AddCarCuiOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/CuiOptionHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/CuiOptionHolder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/ExitCuiOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/ExitCuiOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/RemoveCarCuiOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/RemoveCarCuiOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/ShowCarsCuiOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/ShowCarsCuiOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/StartMovingCuiOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/StartMovingCuiOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/cui/StopMovingCuiOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/cui/StopMovingCuiOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/gui/CarListServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/gui/CarListServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/gui/CarManagerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/gui/CarManagerServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ir/ma/mahsa/gui/MaContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ir/ma/mahsa/gui/MaContextListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/carManagerUI.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/carManagerUI.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/main2.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/main2.css" afterDir="false" />
-    </list>
+    <list default="true" id="51fcecc4-2181-4358-b868-f6e255e87b9b" name="Default" comment="call JavaScript Function With Javacode Result As param" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <manually-removed-from-ignored>
@@ -826,7 +786,7 @@
       <workItem from="1553623774436" duration="1194000" />
       <workItem from="1553688799969" duration="20615000" />
       <workItem from="1553793586103" duration="66000" />
-      <workItem from="1553793694284" duration="8491000" />
+      <workItem from="1553793694284" duration="8579000" />
     </task>
     <task id="LOCAL-00001" summary="B4Scheduler.Working with stop-start">
       <created>1551621187056</created>
@@ -870,7 +830,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553798617890</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="call JavaScript Function With Javacode Result As param">
+      <created>1553812847274</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1553812847274</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -906,11 +873,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100678000" />
+    <option name="totallyTimeSpent" value="100766000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Capture Tool" order="0" />
       <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.498366" visible="true" weight="0.21785174" />
