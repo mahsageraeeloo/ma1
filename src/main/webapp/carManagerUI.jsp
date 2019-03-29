@@ -2,9 +2,6 @@
 <%@ page import="ir.ma.mahsa.business.CarManager" %>
 <%@ page import="ir.ma.mahsa.business.Car" %>
 <%@ page import="ir.ma.mahsa.business.InstanceRegistry" %>
-<%@ page import="ir.ma.mahsa.gui.CarManagerServlet" %>
-<%@ page import="ir.ma.mahsa.gui.CarListServlet" %>
-<%@ page import="java.io.StringWriter" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,56 +39,36 @@
     <button type="submit" name="Stop" value="Stop">Stop</button>
     <input name="action" type="hidden" value="stop">
 </form>
-<form method="post" action="manageCar">
-    <button type="submit" name="Save" value="Save">Save</button>
-    <input name="action" type="hidden" value="save">
-</form>
-<form method="post" action="manageCar">
-    <button type="submit" name="Reset" value="Reset">Reset</button>
-    <input name="action" type="hidden" value="reset">
-</form>
-
 <br><br>
-<div class="container" id="div1">
-    <%--    <%--%>
-    <%--        CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);--%>
-    <%--        for (Car car : cm.getCarList()) { %>--%>
-    <%--    <span class="dot"--%>
-    <%--          style="text-align: center; left: <%=car.getX()%>px; top: <%=car.getY()%>px"><label><%=car.getId()%></label></span>--%>
-    <%--    <%} %>--%>
-    <% CarListServlet cls = InstanceRegistry.lookupSingle(CarListServlet.class);
-        StringWriter sw = new StringWriter();
-        cls.getCarListJson(sw);
-        String json = sw.toString();
-    %>
+<div class="container">
+    <%
+        CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);
+        for (Car car : cm.getCarList()) { %>
+    <span class="dot"
+          style="text-align: center; left: <%=car.getX()%>px; top: <%=car.getY()%>px"><label><%=car.getId()%></label></span>
+    <%} %>
+
 </div>
 <script lang="javascript">
-    function drawCarsFromJson(json) {
-        console.log(json);
-        $.each(jQuery.parseJSON(json), function (index, item) {
-            var spanElement = document.createElement("span");
-            spanElement.setAttribute("class", "dot");
-            spanElement.innerText = item.id;
-            spanElement.style.setProperty("text-align", "center");
-            spanElement.style.setProperty("left", item.X + "px");
-            spanElement.style.setProperty("top", item.Y + "px");
-            $('div').append(spanElement);
-        });
-    }
-
     function startRefresh() {
         setInterval(function () {
             $.ajax({
-                url: "carList", success: function (json) {
+                url: "carList", success: function (result) {
                     $('.dot').remove();
-                    drawCarsFromJson(json);
+                    $ .each(jQuery.parseJSON(result), function (index, item) {
+                        var spanElement = document.createElement("span");
+                        spanElement.setAttribute("class", "dot");
+                        spanElement.innerText = item.id;
+                        spanElement.style.setProperty("text-align", "center")
+                        spanElement.style.setProperty("left",item.X + "px");
+                        spanElement.style.setProperty("top",item.Y + "px");
+                         $('div').append(spanElement);
+                    });
                 }
             });
         }, 1000);
     }
-
     startRefresh();
-    drawCarsFromJson('<%=json%>');
 </script>
 </body>
 </html>
