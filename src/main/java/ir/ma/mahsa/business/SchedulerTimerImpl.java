@@ -15,7 +15,7 @@ public class SchedulerTimerImpl implements IScheduler {
     private int taskId;
 
     public SchedulerTimerImpl() {
-        InstanceRegistry.register(this);
+        InstanceRegistry.getInstance().register(this);
         timer = new Timer(true);
         taskMap = new HashMap<>();
     }

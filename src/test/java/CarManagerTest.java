@@ -1,4 +1,5 @@
 import ir.ma.mahsa.business.*;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,15 +14,23 @@ import java.util.List;
 public class CarManagerTest {
 
     private MockedScheduler mockedScheduler;
+    private CarManager cm;
 
     @Before
     public void setup() {
         mockedScheduler = new MockedScheduler();
+        cm = new CarManager();
+    }
+
+    @After
+    public void tearDown() {
+        InstanceRegistry.getInstance().deregister(mockedScheduler);
+        InstanceRegistry.getInstance().deregister(cm);
     }
 
     @Test
     public void startMoving() throws Exception {
-        CarManager cm = new CarManager();
+        System.out.println("isCarState" + cm.isCarState());
         Car c = getCar(1, 1, 1, 2);
         cm.addCar(c);
         mockedScheduler.setSecondsPassed(3);
@@ -29,11 +38,12 @@ public class CarManagerTest {
         Assert.assertTrue(cm.isCarState());
         Assert.assertTrue(c.getX() == 4);
         Assert.assertTrue(c.getY() == 7);
+        cm.stopMoving();
     }
 
     @Test
     public void stopMoving() throws Exception {
-        CarManager cm = new CarManager();
+        System.out.println("isCarState" + cm.isCarState());
         Car c1 = getCar(1, 1, 1, 2);
         cm.addCar(c1);
         mockedScheduler.setSecondsPassed(2);
@@ -43,11 +53,11 @@ public class CarManagerTest {
         Assert.assertFalse(c1.isRunning());
         Car c2 = getCar(2,3,1,1);
         Thread.sleep(1000);
-        Assert.assertEquals(2, (int) c1.getX());
-        Assert.assertEquals(3, (int) c1.getY());
+        Assert.assertEquals(3, (int) c1.getX());
+        Assert.assertEquals(5, (int) c1.getY());
         Thread.sleep(1000);
-        Assert.assertEquals(2, (int) c1.getX());
-        Assert.assertEquals(3, (int) c1.getY());
+        Assert.assertEquals(2, (int) c2.getX());
+        Assert.assertEquals(3, (int) c2.getY());
     }
 
     @org.junit.Test
@@ -56,7 +66,6 @@ public class CarManagerTest {
         There is a problem here, we do not have any control of changing ID of a car, in this way we may have
         different cars with the same ID
          */
-        CarManager cm = new CarManager();
         List<Car> temp = cm.getCarList();
         int sizeB4;
 
@@ -77,7 +86,6 @@ public class CarManagerTest {
 
     @org.junit.Test
     public void removeCar() throws Exception {
-        CarManager cm = new CarManager();
         List<Car> temp;
 
         Car c = getCar(1, 1, 1, 1);
@@ -126,7 +134,7 @@ public class CarManagerTest {
         private int secondsPassed;
 
         public MockedScheduler() {
-            InstanceRegistry.register(this);
+            InstanceRegistry.getInstance().register(this);
         }
 
         @Override

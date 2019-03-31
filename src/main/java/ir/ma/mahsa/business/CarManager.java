@@ -19,8 +19,8 @@ public class CarManager implements Serializable, IStatefull<List<Car>> {
     I will add an argument for max numbers of cars in car manager
      */
     public CarManager() {
-        scheduler = InstanceRegistry.lookupSingle(IScheduler.class);
-        InstanceRegistry.register(this);
+        scheduler = InstanceRegistry.getInstance().lookupSingle(IScheduler.class);
+        InstanceRegistry.getInstance().register(this);
     }
 
     public void setLastCarId(Integer lastCarId) {

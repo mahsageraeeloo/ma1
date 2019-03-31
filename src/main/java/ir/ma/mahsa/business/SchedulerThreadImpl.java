@@ -13,7 +13,7 @@ public class SchedulerThreadImpl implements IScheduler {
     private int lastTaskID = 0;
 
     public SchedulerThreadImpl() {
-        InstanceRegistry.register(this);
+        InstanceRegistry.getInstance().register(this);
     }
 
     @Override

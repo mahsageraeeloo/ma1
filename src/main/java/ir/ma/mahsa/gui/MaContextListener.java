@@ -12,23 +12,12 @@ public class MaContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         new SchedulerTimerImpl();
         new CarManager();
-        try {
-            new StateManagerFileImpl().retrieveState(InstanceRegistry.lookupSingle(CarManager.class));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        new StateManagerFileImpl();
+        InstanceRegistry.getInstance().initObjects();
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);
-        IStateManager iStateManager = InstanceRegistry.lookupSingle(IStateManager.class);
-        try {
-            iStateManager.saveState(cm);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        InstanceRegistry.getInstance().destroyObjects();
     }
 }

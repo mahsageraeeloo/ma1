@@ -3,11 +3,47 @@ package ir.ma.mahsa.business;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
-public class StateManagerFileImpl implements IStateManager {
+public class StateManagerFileImpl implements IStateManager, IHasLifeCycle {
     private boolean isSaved = false;
+    private Properties properties;
     public StateManagerFileImpl() {
-        InstanceRegistry.register(this);
+        InstanceRegistry.getInstance().register(this);
+        properties = new Properties();
+        try {
+            properties.load(StateManagerFileImpl.class.getResourceAsStream("/manager.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void initialize() {
+        try {
+            List<IStatefull> iStatefulls = InstanceRegistry.getInstance().lookupMultiple(IStatefull.class);
+            for (IStatefull iStatefull : iStatefulls) {
+                retrieveState(iStatefull);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void destroy() {
+        if (isAutoSave()) {
+            try {
+                List<IStatefull> iStatefulls = InstanceRegistry.getInstance().lookupMultiple(IStatefull.class);
+                for (IStatefull iStatefull : iStatefulls) {
+                    saveState(iStatefull);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public boolean isSaved() {
@@ -21,13 +57,13 @@ public class StateManagerFileImpl implements IStateManager {
 
     @Override
     public void saveState(IStatefull<?> statefull) throws IOException {
-        if(!this.isSaved()) {
+//        if(!this.isSaved()) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("./carList.bin", false));
             objectOutputStream.writeObject(statefull.getState());
             objectOutputStream.flush();
             objectOutputStream.close();
             this.setSaved(true);
-        }
+//        }
     }
 
     @Override
@@ -35,6 +71,11 @@ public class StateManagerFileImpl implements IStateManager {
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("./carList.bin"));
         statefull.setState((S) objectInputStream.readObject());
         objectInputStream.close();
+    }
+
+    @Override
+    public boolean isAutoSave() {
+        return Boolean.valueOf(properties.getProperty("autoSave"));
     }
 
 //    public void persistCarList(CarManager cm) throws IOException {

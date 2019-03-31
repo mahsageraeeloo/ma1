@@ -14,7 +14,7 @@ import java.io.Writer;
 
 public class CarListServlet extends HttpServlet {
     public CarListServlet() {
-        InstanceRegistry.register(this);
+        InstanceRegistry.getInstance().register(this);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class CarListServlet extends HttpServlet {
     }
 
     public void getCarListJson(Writer writer) throws IOException {
-        CarManager cm = InstanceRegistry.lookupSingle(CarManager.class);
+        CarManager cm = InstanceRegistry.getInstance().lookupSingle(CarManager.class);
         writer.write("[");
         boolean isFirstCar = true;
         for (Car car : cm.getCarList()
