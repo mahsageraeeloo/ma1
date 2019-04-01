@@ -5,6 +5,7 @@
 <%@ page import="ir.ma.mahsa.gui.CarManagerServlet" %>
 <%@ page import="ir.ma.mahsa.gui.CarListServlet" %>
 <%@ page import="java.io.StringWriter" %>
+<%@ page import="ir.ma.mahsa.business.IStateManager" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,16 +40,20 @@
     <input name="action" type="hidden" value="start">
 </form>
 <form method="post" action="manageCar">
-    <button type="submit" name="Stop" value="Stop">Stop</button>
-    <input name="action" type="hidden" value="stop">
+    <button type="submit" name="Reset" value="Reset">Reset</button>
+    <input name="action" type="hidden" value="reset">
 </form>
+<% if (! InstanceRegistry.getInstance().lookupSingle(IStateManager.class).isAutoSave())
+{%>
 <form method="post" action="manageCar">
     <button type="submit" name="Save" value="Save">Save</button>
     <input name="action" type="hidden" value="save">
 </form>
+<%}%>
+
 <form method="post" action="manageCar">
-    <button type="submit" name="Reset" value="Reset">Reset</button>
-    <input name="action" type="hidden" value="reset">
+    <button type="submit" name="Stop" value="Stop">Stop</button>
+    <input name="action" type="hidden" value="stop">
 </form>
 
 <br><br>
