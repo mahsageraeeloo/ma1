@@ -100,6 +100,7 @@ public class CarManager implements Serializable, IStatefull<List<Car>> {
 
     @Override
     public List<Car> getState() {
+        //StopMoving?????
         return this.getCarList();
     }
 

@@ -69,5 +69,18 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <!-- Tomcat plugin-->
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <port>9000</port>
+          <path>/spring5-webmvc-demo</path>
+        </configuration>
+      </plugin>
+
+    </plugins>
   </build>
 </project>

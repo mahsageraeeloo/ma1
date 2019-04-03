@@ -65,4 +65,32 @@ public class StateManagerFileImpl implements IStateManager, IHasLifeCycle {
     public boolean isAutoSave() {
         return Boolean.valueOf(properties.getProperty("autoSave"));
     }
+
+    public static void main(String[] args) throws IOException {
+        Properties properties = System.getProperties();
+        properties.forEach((o, o2) -> System.out.println(o + "=" + o2));
+        properties.load(StateManagerFileImpl.class.getResourceAsStream("/manager.properties"));
+        System.out.println(System.getProperty("java.io.tmpdir"));
+        System.out.println(System.getProperty("user.home"));
+        System.out.println(DirName.valueOf("OTHER").getDir());
+    }
+    public enum DirName{
+        TMP,
+        HOME,
+        OTHER;
+        public String getDir(){
+            switch (this)
+            {
+                case TMP:
+                    return System.getProperty("java.io.tmpdir");
+                case HOME:
+                    return System.getProperty("user.home");
+                case OTHER:
+                    return null;
+                    default:
+                        throw new RuntimeException(":D");
+            }
+        }
+
+    }
 }

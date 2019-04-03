@@ -1,7 +1,9 @@
 package ir.ma.mahsa.cui;
 
 import ir.ma.mahsa.business.CarManager;
+import ir.ma.mahsa.business.InstanceRegistry;
 import ir.ma.mahsa.business.SchedulerTimerImpl;
+import ir.ma.mahsa.business.StateManagerFileImpl;
 
 import java.util.Scanner;
 
@@ -14,10 +16,10 @@ public class MainClass {
         int input;
         SchedulerTimerImpl scheduler = new SchedulerTimerImpl();
         CarManager cm = new CarManager();
+        new StateManagerFileImpl();
+        InstanceRegistry.getInstance().initObjects();
         Scanner scanner = new Scanner(System.in);
         boolean loopFlag = true;
-        // init options
-
 
         do {
             System.out.println("Please enter an operation:");
@@ -30,5 +32,6 @@ public class MainClass {
             AbstractCuiOption cuiOption = CuiOptionHolder.values()[input - 1].getOption();
             loopFlag = cuiOption.runOption(scanner, cm);
         } while (loopFlag);
+        InstanceRegistry.getInstance().destroyObjects();
     }
 }

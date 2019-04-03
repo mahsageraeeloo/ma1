@@ -6,6 +6,8 @@ public enum CuiOptionHolder {
     START_MOVING(new StartMovingCuiOption()),
     STOP_MOVING (new StopMovingCuiOption()),
     SHOW_CARS   (new ShowCarsCuiOption()),
+    SAVE_CARS   (new SaveCarsCuiOptions()),
+    RESEt_CARS  (new ResetCuiOptions()),
     EXIT        (new ExitCuiOption());
 
     private AbstractCuiOption option;
